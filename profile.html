@@ -186,7 +186,7 @@
                 </div>
                 <div class="chat-backup" ng-if="myChatData">
                     <ul class="pl-2 mb-0 no-points">
-                        <li class="chat-backup-list chat-list-left" ng-repeat="li in myChatData" ng-class="{'chat-list-right': li.type == 'outgoing'}">{{li.text}}</li>
+                        <li class="chat-backup-list chat-list-left pointer" ng-repeat="li in myChatData" ng-class="{'chat-list-right': li.type == 'outgoing'}" ng-click="syThisSentence(li)">{{li.text}}</li>
                     </ul>
                 </div>
             </div>
@@ -307,6 +307,21 @@
                     $scope.getMyAnswers(); 
                 }
             };
+
+            $scope.sayIt = function (myText) {
+                var synth = window.speechSynthesis;  
+                var utterThis = new SpeechSynthesisUtterance(myText);
+                utterThis.rate = 0.8;
+                synth.speak(utterThis);
+            };
+
+            $scope.syThisSentence = function(data)
+            {
+                if(data.type == 'outgoing')
+                {
+                    $scope.sayIt(data.text);
+                }
+            }
 
         }]);
     </script>
