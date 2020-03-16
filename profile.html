@@ -193,8 +193,8 @@
                 var res = [];
                 angular.forEach($scope.myDetailsArr,function(value,key){
 
-                    var str = value.keyword; 
-                    var strRegExPattern = '\\b'+qsn+'\\b'; 
+                    var str = qsn; 
+                    var strRegExPattern = '\\b'+value.keyword+'\\b'; 
 
                     res = str.match(new RegExp(strRegExPattern,'g'));
 
