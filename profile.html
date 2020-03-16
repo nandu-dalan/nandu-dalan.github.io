@@ -1,13 +1,12 @@
 <html ng-app="app">
 <meta charset="utf-8" edited header>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
 <meta name="description" content="">
 <meta name="keywords" content="">
 <meta name="author" content="Nandu Dalan">
 <title>Nandu Dalan</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
+<link rel="stylesheet" href="bootstrap.css">
+<script src="angular.js"></script>
 <script>
     var app = angular.module('app',[]);
 </script>
@@ -161,6 +160,10 @@
     .pointer{
         cursor: pointer;
     }
+    .bot-links, .bot-links:focus, .bot-links:hover{
+        color:white;
+
+    }
 </style>
 <body ng-controller="nanduCtrl">
     <div class="header">
@@ -184,9 +187,16 @@
                         </div> -->
                     </form>
                 </div>
-                <div class="chat-backup" ng-if="myChatData">
+                <div class="chat-backup" ng-cloak ng-show="myChatData">
                     <ul class="pl-2 mb-0 no-points">
-                        <li class="chat-backup-list chat-list-left pointer" ng-repeat="li in myChatData" ng-class="{'chat-list-right': li.type == 'outgoing'}" ng-click="syThisSentence(li)">{{li.text}}</li>
+                        <li class="chat-backup-list chat-list-left pointer" ng-repeat="li in myChatData" ng-class="{'chat-list-right': li.type == 'outgoing'}" >
+                            <span ng-click="syThisSentence(li)">{{li.text}}</span>
+                            <ul class="no-points pl-2 mb-0">
+                                <li ng-repeat="pr in li.projects">
+                                    <a class="bot-links" href="{{pr.link}}" target="_blank"><b>{{pr.name}}</b></a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -240,6 +250,16 @@
                 {
                     keyword : "hello",
                     answer : "Hello Human..!!"
+                },
+                {
+                    keyword : "projects",
+                    answer : "Below are some of my projects..",
+                    projects : [
+                        {
+                            name : "Virtual Keyboard",
+                            link : "https://nandu-dalan.github.io/keyboard.html"
+                        }
+                    ]
                 }
             ];
 
@@ -248,6 +268,7 @@
             $scope.giveAnswer = function(qsn)
             {
                 var res = [];
+                var bres = [];
                 angular.forEach($scope.myDetailsArr,function(value,key){
 
                     var str = qsn.toLowerCase();
@@ -262,9 +283,15 @@
                         {
                             $scope.myAnswer = value.answer;
 
+                            if(value.projects)
+                                $scope.myProjes = value.projects;
+                            else
+                                $scope.myProjes = "";
+
                             $scope.myChatData.push({
                                 type : "outgoing",
-                                text : $scope.myAnswer
+                                text : $scope.myAnswer,
+                                projects : $scope.myProjes
                             });
                         }
                         else
