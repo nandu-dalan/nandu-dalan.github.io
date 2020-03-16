@@ -1,0 +1,475 @@
+<html ng-app="app">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="bootstrap.css">
+		<script src="angular.js"></script>
+		<script>var app = angular.module('app',[]);</script>
+		<style>
+			.piano_list{
+				padding:15px;
+				text-align:center;
+				border-top:100px solid black;
+				border-bottom:5px solid black;
+				border-radius:10px;
+				border-left:5px solid black;
+				border-right:5px solid black;
+				-webkit-box-shadow: 4px 11px 14px 2px rgba(0,0,0,0.75);
+				-moz-box-shadow: 4px 11px 14px 2px rgba(0,0,0,0.75);
+				box-shadow: 4px 11px 14px 2px rgba(0,0,0,0.75);
+			}
+			.piano_key{
+				padding: 100px 3px 2px 3px;
+				border:1px solid lightgray;
+				background-color:black;
+				color:white;
+			}
+
+			.piano_key:hover, .piano_key:focus{
+				cursor: pointer;
+				background-color:lightgray;
+				color:black;
+				border:1px solid black;
+			}
+			.list-inline-item:not(:last-child) {
+			    margin-right: 0rem;
+			}
+			.full-width{
+				width:100%;
+			}
+			button:focus{
+				outline:none !important;
+				box-shadow: none !important;
+			}
+		</style>
+	</head>
+	<body ng-controller="pianoCtrl">
+		<h5 class="text-center">Piano</h5>
+		<div class="container-fluid mt-2">
+			<div class="row">
+				<div class="col-md-12">
+					<audio id="myAudioA0">
+						<source src="A0.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioB0">
+						<source src="B0.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioC1">
+						<source src="C1.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioD1">
+						<source src="D1.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioE1">
+						<source src="E1.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioF1">
+						<source src="F1.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioG1">
+						<source src="G1.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioA1">
+						<source src="A1.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioB1">
+						<source src="B1.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioC2">
+						<source src="C2.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioD2">
+						<source src="D2.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioE2">
+						<source src="E2.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioF2">
+						<source src="F2.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioG2">
+						<source src="G2.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioA2">
+						<source src="A2.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioB2">
+						<source src="B2.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioC3">
+						<source src="C3.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioD3">
+						<source src="D3.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioE3">
+						<source src="E3.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioF3">
+						<source src="F3.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioG3">
+						<source src="G3.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioA3">
+						<source src="A3.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioB3">
+						<source src="B3.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioC4">
+						<source src="C4.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioD4">
+						<source src="D4.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioE4">
+						<source src="E4.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioF4">
+						<source src="F4.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioG4">
+						<source src="G4.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioA4">
+						<source src="A4.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioB4">
+						<source src="B4.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioC5">
+						<source src="C5.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioD5">
+						<source src="D5.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioE5">
+						<source src="E5.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioF5">
+						<source src="F5.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioG5">
+						<source src="G5.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioA5">
+						<source src="A5.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioB5">
+						<source src="B5.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioC6">
+						<source src="C6.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioD6">
+						<source src="D6.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioE6">
+						<source src="E6.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioF6">
+						<source src="F6.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioG6">
+						<source src="G6.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioA6">
+						<source src="A6.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioB6">
+						<source src="B6.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioC7">
+						<source src="C7.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioD7">
+						<source src="D7.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioE7">
+						<source src="E7.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioF7">
+						<source src="F7.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioG7">
+						<source src="G7.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioA7">
+						<source src="A7.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioB7">
+						<source src="B7.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="myAudioC8">
+						<source src="C8.mp3" type="audio/mpeg">
+					</audio>
+					<ul class="list-inline piano_list">
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_A0" ng-click="playSound('A0')">A0</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_B0" ng-click="playSound('B0')">B0</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_C1" ng-click="playSound('C1')">C1</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_D1" ng-click="playSound('D1')">D1</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_E1" ng-click="playSound('E1')">E1</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_F1" ng-click="playSound('F1')">F1</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_G1" ng-click="playSound('G1')">G1</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_A1" ng-click="playSound('A1')">A1</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_B1" ng-click="playSound('B1')">B1</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_C2" ng-click="playSound('C2')">C2</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_D2" ng-click="playSound('D2')">D2</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_E2" ng-click="playSound('E2')">E2</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_F2" ng-click="playSound('F2')">F2</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_G2" ng-click="playSound('G2')">G2</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_A2" ng-click="playSound('A2')">A2</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_B2" ng-click="playSound('B2')">B2</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_C3" ng-click="playSound('C3')">C3</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_D3" ng-click="playSound('D3')">D3</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_E3" ng-click="playSound('E3')">E3</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_F3" ng-click="playSound('F3')">F3</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_G3" ng-click="playSound('G3')">G3</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_A3" ng-click="playSound('A3')">A3</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_B3" ng-click="playSound('B3')">B3</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_C4" ng-click="playSound('C4')">C4</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_D4" ng-click="playSound('D4')">D4</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_E4" ng-click="playSound('E4')">E4</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_F4" ng-click="playSound('F4')">F4</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_G4" ng-click="playSound('G4')">G4</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_A4" ng-click="playSound('A4')">A4</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_B4" ng-click="playSound('B4')">B4</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_C5" ng-click="playSound('C5')">C5</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_D5" ng-click="playSound('D5')">D5</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_E5" ng-click="playSound('E5')">E5</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_F5" ng-click="playSound('F5')">F5</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_G5" ng-click="playSound('G5')">G5</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_A5" ng-click="playSound('A5')">A5</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_B5" ng-click="playSound('B5')">B5</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_C6" ng-click="playSound('C6')">C6</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_D6" ng-click="playSound('D6')">D6</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_E6" ng-click="playSound('E6')">E6</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_F6" ng-click="playSound('F6')">F6</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_G6" ng-click="playSound('G6')">G6</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_A6" ng-click="playSound('A6')">A6</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_B6" ng-click="playSound('B6')">B6</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_C7" ng-click="playSound('C7')">C7</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_D7" ng-click="playSound('D7')">D7</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_E7" ng-click="playSound('E7')">E7</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_F7" ng-click="playSound('F7')">F7</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_G7" ng-click="playSound('G7')">G7</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_A7" ng-click="playSound('A7')">A7</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_B7" ng-click="playSound('B7')">B7</button>
+						</li>
+						<li class="list-inline-item">
+							<button class="piano_key" id="btn_C8" ng-click="playSound('C8')">C8</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-6">
+					<button class="btn btn-sm btn-outline-danger full-width" ng-if="myArr[0]" ng-click="playAll()">Play</button>
+				</div>
+				<div class="col-md-6">
+					<button class="btn btn-sm btn-outline-danger full-width"  ng-click="randonArr()">Random</button>
+				</div>
+			</div>
+		</div>
+		<script>
+			app.controller("pianoCtrl",function($scope){
+
+				$scope.myArr = [];
+
+				$scope.playSound = function(val)
+				{
+
+					$scope.myArr.push(val);
+					var myKey = "myAudio" +val;
+
+					if(myKey)
+					{
+						var x = document.getElementById(myKey);
+
+						x.play();
+					}
+				}
+
+				$scope.playAll = function()
+				{
+					angular.forEach($scope.myArr,function(value,key){
+						if(value)
+						{
+							 setTimeout(function(){
+						        var myKey = "myAudio" +value;
+						        var btnId = "btn_"+value
+								if(myKey)
+								{
+									var y = document.getElementById(myKey);
+									var z = document.getElementById(btnId);
+
+									if(y)
+									{
+										y.play();
+									}
+
+									if(z)
+									{
+										z.focus();
+									}
+
+									
+								}
+						    },key * 500)
+						}
+					});
+
+					$scope.myArr = [];
+				}
+
+				$scope.randonArr = function()
+				{
+					$scope.randarr = ["A4","B4","C4","D4","E4","F4","A5","B5","C5","D5","E5","F5"];
+
+					angular.forEach($scope.randarr,function(value,key){
+						var myVal = $scope.randarr[Math.floor(Math.random()*$scope.randarr.length)];
+
+						setTimeout(function(){
+					        var myKey = "myAudio" +myVal;
+					        var btnId = "btn_"+myVal
+							if(myKey)
+							{
+								var y = document.getElementById(myKey);
+								var z = document.getElementById(btnId);
+
+								if(y)
+								{
+									y.play();
+								}
+
+								if(z)
+								{
+									z.focus();
+								}
+
+								
+							}
+					    },key * 500)
+
+						console.log(myVal);
+					})
+				}
+
+				
+
+				
+
+				// var t0 = performance.now();
+
+				// doSomething();
+
+				// var t1 = performance.now();
+				// console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.");
+			})
+		</script>
+	</body>
+</html>
