@@ -220,6 +220,26 @@
                 {
                     keyword : "skills",
                     answer : "I have good Knowledge on HTML, CSS, Javascript, Jquery, AngularJS. and i have basic knowledge on php, mysql.. i am learning some other techlologies like ReactJS, NodeJS, Python etc"
+                },
+                {
+                    keyword : "name",
+                    answer : "My professional name is ' Nandeesh Kumar D ' . You can call me as ' Nandu..'"
+                },
+                {
+                    keyword : "gender",
+                    answer : "I am Alpha Male."
+                },
+                {
+                    keyword : "location",
+                    answer : "I am currently in Banglore ( Sillicon Vally of India )"
+                },
+                {
+                    keyword : "hai",
+                    answer : "Hey Human..!!"
+                },
+                {
+                    keyword : "hello",
+                    answer : "Hello Human..!!"
                 }
             ];
 
@@ -230,7 +250,8 @@
                 var res = [];
                 angular.forEach($scope.myDetailsArr,function(value,key){
 
-                    var str = qsn; 
+                    var str = qsn.toLowerCase();
+
                     var strRegExPattern = '\\b'+value.keyword+'\\b'; 
 
                     res = str.match(new RegExp(strRegExPattern,'g'));
