@@ -1,0 +1,262 @@
+<html ng-app="app">
+<meta charset="utf-8" edited header>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="author" content="Nandu Dalan">
+<title>Nandu Dalan</title>
+<link rel="stylesheet" href="bootstrap.css">
+<script src="angular.js"></script>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<script>
+    var app = angular.module('app',[]);
+</script>
+<style>
+    /*@import url(//fonts.googleapis.com/css?family=Lato:300:400);*/
+    body {
+        margin: 0;
+        font-family: 'Lato', sans-serif;
+    }
+    .text-shadow {
+        font-family: 'Lato', sans-serif;
+        font-weight: 300;
+        letter-spacing: 2px;
+        font-size: 28px;
+        text-shadow: 2px 4px 3px rgba(7,7,7,0.84);
+    }
+    p {
+        font-family: 'Lato', sans-serif;
+        letter-spacing: 1px;
+        font-size: 14px;
+        color: #333333;
+    }
+    .header {
+        position: relative;
+        text-align: center;
+        background: linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
+        color: white;
+    }
+    .logo {
+        width: 50px;
+        fill: white;
+        padding-right: 15px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .inner-header {
+        height: 65vh;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .flex {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding-top:50px;
+    }
+    .waves {
+        position: relative;
+        width: 100%;
+        height: 15vh;
+        margin-bottom: -7px;
+        min-height: 100px;
+        max-height: 150px;
+    }
+    .content {
+        position: relative;
+        height: 20vh;
+        text-align: center;
+        background-color: white;
+    }
+    .parallax>use {
+        animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+    }
+    .parallax>use:nth-child(1) {
+        animation-delay: -2s;
+        animation-duration: 7s;
+    }
+    .parallax>use:nth-child(2) {
+        animation-delay: -3s;
+        animation-duration: 10s;
+    }
+    .parallax>use:nth-child(3) {
+        animation-delay: -4s;
+        animation-duration: 13s;
+    }
+    .parallax>use:nth-child(4) {
+        animation-delay: -5s;
+        animation-duration: 20s;
+    }
+    @keyframes move-forever {
+        0% {
+            transform: translate3d(-90px, 0, 0);
+        }
+        100% {
+            transform: translate3d(85px, 0, 0);
+        }
+    }
+    @media (max-width: 768px) {
+        .waves {
+            height: 80px;
+            min-height: 70px;
+        }
+        .content {
+            height: 30vh;
+        }
+        .bot-container{
+            margin-left: 11% !important;
+            width: 80% !important;
+        }
+        
+        .text-shadow {
+            font-size: 22px !important;
+        }
+    }
+
+    .bot-container{
+        margin-left:26%;
+        width:50%;
+    }
+
+    .bot-container-inner{
+        min-height:360px;
+        background-color:#5b47de00;
+        border:1px solid #fffefeb0;
+        border-radius:20px;
+        -webkit-box-shadow: 10px 11px 18px -11px rgba(0,0,0,0.75);
+        -moz-box-shadow: 10px 11px 18px -11px rgba(0,0,0,0.75);
+        box-shadow: 10px 11px 18px -11px rgba(0,0,0,0.75);
+        z-index:9999;
+        position: relative;
+    }
+    .form-container{
+        margin:20px;
+    }
+    .bot-reply{
+        color:black;
+    }
+    .no-points{
+        list-style-type: none;
+    }
+
+    .chat-backup-list
+    {
+        width:50%;
+        border-radius:10px;
+        font-size:12px;
+        padding:10px;
+        margin-top:5px;
+    }
+
+    .chat-list-left
+    {
+        background-color:#05658c;
+    }
+
+    .chat-list-right{
+        background-color:#4670e6 !important;
+        margin-left:50%;
+    }
+    
+    .pointer{
+        cursor: pointer;
+    }
+    .bot-links, .bot-links:focus, .bot-links:hover{
+        color:white;
+
+    }
+
+    .main-text{
+        font-size:25px;
+        padding-top:100px;
+    }
+
+    .main-text1{
+        font-size:45px;
+    }
+
+    .main-text2{
+        font-size:560%;
+        font-weight: bold;
+        background: radial-gradient(circle, #1e24d6 0%, #0f151b 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: beat .60s infinite alternate;
+    }
+
+    .heart {
+        font-size: 55px;
+        animation: beat .60s infinite alternate;
+        transform-origin: center;
+        position: absolute;
+        top: 4%;
+        left: 34%;
+    }
+
+    .main-text4{
+        font-size: 16px;
+    }
+
+    .main-text3{
+        font-size: 15px;
+        padding: 5px 10px;
+        margin: 0;
+    }
+
+    /* Heart beat animation */
+    @keyframes beat{
+        to { transform: scale(1.4); }
+    }
+
+    .trans{
+        color:transparent!important;
+        background:transparent !important;
+    }
+</style>
+<body ng-controller="nanduCtrl">
+    <div class="header">
+        <div class="inner-header flex bot-container" ng-click="play();">
+            <div class="bot-container-inner">
+                <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_fJ7CVd.json"  background="transparent"  speed="0.5"  style="width: 100%; height: 100%;position: absolute;position:absolute;top:-25%;"  loop  autoplay></lottie-player>
+                <h4 class="main-text">ONCE</h4>
+                <h4 class="main-text4">IN OUR LIFE TIME DATE</h4>
+                <h4 class="main-text1">02-02-2022</h4>
+                <h5 class="main-text3">Next time its going to happen on </h5>
+                <h5 class="main-text3">02-02-2222 ( We Won't be alive )</h5>
+                <div class="heart">&#128525;</div>
+                <audio id="myAudioC8">
+                    <source src="flute.mp3" type="audio/mpeg">
+                </audio>
+                <div class="center" style="text-align:center;">Click Here</div>
+            </div>
+        </div>
+        <div>
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+                </g>
+            </svg>
+        </div>
+    </div>
+    <script>
+        app.controller("nanduCtrl",['$scope',function($scope){
+            //var y = document.getElementById('myAudioC8');
+            //y.play();
+
+            $scope.play = function(){
+                var y = document.getElementById('myAudioC8');
+                y.play();
+            }
+
+            //$scope.play();
+        }]);
+    </script>
+</body>
+</html>
