@@ -1,0 +1,267 @@
+<html ng-app="app">
+    <meta charset="utf-8" edited header>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Nandu Dalan">
+    <title>Nandu Dalan</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;1,100&display=swap" rel="stylesheet">
+    <script src="angular.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script>
+        var app = angular.module('app',[]);
+    </script>
+    <style>
+
+        html, body {
+          background: #44c5f336;
+          overflow: hidden;
+        }
+
+        .drop {
+          background: white;
+          width: 6px;
+          height: 6px;
+          border-radius: 12px;
+          right: 210px;
+          animation: fall 3s ease-in 0s infinite;
+          animation-fill-mode: both;
+          position: absolute;
+        }
+        .drop:nth-child(even) {
+          top: 10px;
+          left: -12px;
+          width: 8px;
+          height: 8px;
+          border-radius: 40px;
+          animation-delay: 1s !important;
+        }
+        .drop:nth-child(3n - 1) {
+          top: 0px;
+          left: 20px;
+          left-animation-delay: 2s !important;
+        }
+        .drop:nth-child(3n + 1) {
+          left: 0px;
+          top: -10px;
+          animation-delay: 3s !important;
+        }
+        .drop:nth-child(4n - 1) {
+          left: 110px;
+          top: -30px;
+          animation-delay: 2.5s !important;
+        }
+        .drop:nth-child(4n + 1) {
+          left: 45px;
+          top: 15px;
+          animation-delay: 1.5s !important;
+        }
+        .drop:nth-child(5n - 1) {
+          left: 95px;
+          top: -40px;
+        }
+        .drop:nth-child(-5n + 1) {
+          left: 65px;
+          top: 10px;
+          animation-delay: 2.25s !important;
+        }
+        .drop:nth-child(6n + 1) {
+          left: 37px;
+          top: -65px;
+          animation-delay: 1.25s !important;
+        }
+
+        #stuff {
+          position: absolute;
+          margin: auto;
+          top: 100px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          width: 200px;
+        }
+
+        .cloud {
+          height: 120px;
+          width: 120px;
+          border-radius: 150px 150px 0px 0px;
+          position: relative;
+        }
+        .cloud, .cloud:before, .cloud:after {
+          box-shadow: inset 20px 10px 40px -32px rgba(0, 0, 0, 0.75);
+          background: #fff;
+        }
+        .cloud:before, .cloud:after {
+          content: " ";
+          display: block;
+          position: absolute;
+          bottom: 0px;
+        }
+        .cloud:before {
+          height: 70px;
+          width: 70px;
+          border-radius: 150px 150px 0px 150px;
+          left: -40px;
+        }
+        .cloud:after {
+          height: 85px;
+          width: 85px;
+          border-radius: 150px 150px 150px 0px;
+          right: -55px;
+          z-index: -1;
+        }
+
+        @keyframes fall {
+          0% {
+            margin-top: 90px;
+            opacity: 1;
+          }
+          60% {
+            opacity: 1;
+            margin-left: 45px;
+          }
+          100% {
+            margin-top: 400px;
+            opacity: 0;
+          }
+        }
+        @keyframes float {
+          0% {
+            left: 0.5%;
+          }
+          50% {
+            left: -0.5%;
+          }
+          100% {
+            left: 0.5%;
+          }
+        }
+
+        html,body{
+            height: 100%;
+            font-family: 'Raleway', sans-serif;
+        }
+        .firstscreen,.secondscreen{
+            padding-top: 300px;
+        }
+        .text-center{
+            text-align: center;
+        }
+        .wishbox{
+            position: absolute;
+            width: 100%;
+            left: 0;
+            padding: 10px;
+        }
+
+        .form-control:focus {
+            border-color: #e7fbff;
+        }
+
+        .form-control, .form-control:focus{
+            border: ipx solid #e7fbff !important;
+            background-color: #e7fbff;
+            padding: 10px;
+            line-height: 40px;
+        }   
+
+        @media only screen and (max-width: 600px) {
+            .wishbox{
+                width: 100%;
+            }
+        }
+
+        .fontw{
+            font-weight: 800;
+            color: red;
+        }
+
+        .wishestext{
+            font-weight: 800;
+            color: #001180;
+        }
+    </style>
+    <body ng-controller="nanduCtrl" id="mainbody">
+        <div class="container">
+            <div id='stuff'>
+                <div class='cloud'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+                <div class='drop'></div>
+            </div>
+            <div class="firstscreen" id="firstScreen" ng-hide="hidefirstscreen">
+                <h4 class="maintext text-center">May i know your "Name" ?</h4>
+                <div class="wishbox">
+                    <form>
+                        <div class="form-group">
+                            <input class="form-control text-center shadow-none" ng-model="yourname">
+                        </div>
+                        <div class="text-center">
+                            <button ng-if="yourname" class="btn btn-sm btn-info" ng-click="proceedtoNext()">PROCEED</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="secondscreen" id="secondScreen" ng-show="hidefirstscreen">
+                <h3 class="maintext text-center">Hi {{yourname}}</h3><br>
+                <h4 class="maintext text-center">You have picked <b class="fontw">" {{selectedItem}} "</b>, one of my favourite things.</h4><br>
+                <h4 class="maintext text-center">Send <b class="fontw">" {{selectedItem}} "</b> to me in WhatsApp and send your memorable</h4>
+                <h3 class="maintext text-center wishestext">B'Day Wishes</h3>
+                <audio id="myAudioC8">
+                    <source src="flute.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+    </body>
+    <script>
+        app.controller("nanduCtrl",['$scope',function($scope){
+            //var y = document.getElementById('myAudioC8');
+            //y.play();
+
+            var animArr = ['Dog Image','Cat Image','Panda Image','Naruto Anime Image','One Piece anime Image','Any Painting Image','A R Rahman Song','Parrot Image','Rabbit Image','Cake Image','Chocolate Image']
+
+            $scope.hidefirstscreen = false;
+
+            $scope.proceedtoNext = function(){
+                $scope.hidefirstscreen = true;
+                var item = animArr[Math.floor(Math.random()*animArr.length)];
+                $scope.selectedItem = item;
+
+                var y = document.getElementById('myAudioC8');
+                y.play();
+            }
+        }]);
+    </script>
+</html>
