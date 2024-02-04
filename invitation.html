@@ -147,10 +147,13 @@
                     <h4 class="main-heading">Feb 17th 7:30 PM Onwards</h4>
                     <p class="main-heading">Wedding</p>
                     <h4 class="main-heading">Feb 18th 9:30 AM Onwards</h4>
-                    <h3 class="main-heading">Bavasara Kalyana Mandapam</h3>
+                    <h3 class="main-heading">Bhavasara Kalyana Mandapam</h3>
                     <h4 class="main-heading">Viduraswatha, Gauribidanur</h4><br>
                     <a class="google-link" href="https://maps.app.goo.gl/mi3JB3eJBt5oy2MFA" target="_blank">Open in Google Maps</a><br><br>
                     <span class="chat-link" onclick="displaychat()" class="chat-button">Chat!</span>
+                    <audio id="myAudioC8">
+                        <source src="wedding.mp3" type="audio/mpeg">
+                    </audio>
                 </div>
                 <div class="chat-container" id="chatDisplay">
                     <span class="endchat-button" onclick="closeChat()">X</span>
@@ -238,6 +241,9 @@
             var iframe = document.getElementById('myIframe');
             iframe.src = "https://embed.fixie.ai/agents/04c6bdc5-979e-44ad-b0b0-237cdab9bed8?agentStartsConversation=1";
         }
+
+        var y = document.getElementById('myAudioC8');
+        y.play();
     }
 
     function closeChat(){
@@ -247,7 +253,5 @@
             chatbtn.style.display = 'none';
         }
     }
-
-
 </script>
 </html>
