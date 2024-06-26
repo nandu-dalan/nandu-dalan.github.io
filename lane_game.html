@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lane Collection Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style type="text/css">
+    /* styles.css */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.game-container {
+    text-align: center;
+}
+
+#game-area {
+    position: relative;
+    width: 300px;
+    height: 600px;
+    background-color: #ddd;
+    border: 2px solid #333;
+    overflow: hidden;
+}
+
+#player {
+    position: absolute;
+    bottom: 10px;
+    left: 130px;
+    width: 40px;
+    height: 40px;
+    background-color: #4CAF50;
+    cursor: pointer;
+}
+
+.obstacle {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #ff4c4c;
+}
+
+#score {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+</style>
+<body>
+    <div class="game-container">
+        <div id="game-area">
+            <div id="player"></div>
+        </div>
+        <div id="score">Score: 0</div>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+<script type="text/javascript">
+    // script.js
+const gameArea = document.getElementById('game-area');
+const player = document.getElementById('player');
+const scoreDisplay = document.getElementById('score');
+let obstacles = [];
+let gameInterval;
+let obstacleInterval;
+let isDragging = false;
+let score = 0;
+let speed = 5;
+let speedBoost = false;
+
+document.addEventListener('mousedown', startDragging);
+document.addEventListener('mousemove', dragPlayer);
+document.addEventListener('mouseup', stopDragging);
+
+document.addEventListener('touchstart', startDragging);
+document.addEventListener('touchmove', dragPlayer);
+document.addEventListener('touchend', stopDragging);
+
+function startGame() {
+    player.style.left = '130px'; // Reset player position
+    player.style.bottom = '10px'; // Ensure the player is positioned at the bottom
+    obstacles.forEach(obstacle => obstacle.remove());
+    obstacles = [];
+    score = 0;
+    speed = 5;
+    speedBoost = false;
+    updateScore();
+    clearInterval(gameInterval);
+    clearInterval(obstacleInterval);
+    gameInterval = setInterval(gameLoop, 20);
+    obstacleInterval = setInterval(createObstacle, 2000);
+    setTimeout(increaseSpeed, 10000 + Math.random() * 10000); // Random speed increase between 10 and 20 seconds
+}
+
+function startDragging(event) {
+    isDragging = true;
+}
+
+function dragPlayer(event) {
+    if (!isDragging) return;
+
+    let clientX;
+    if (event.touches) {
+        clientX = event.touches[0].clientX;
+    } else {
+        clientX = event.clientX;
+    }
+
+    const gameAreaRect = gameArea.getBoundingClientRect();
+    const relativeX = clientX - gameAreaRect.left;
+    const clampedX = Math.max(0, Math.min(gameAreaRect.width - player.offsetWidth, relativeX));
+    player.style.left = `${clampedX}px`;
+}
+
+function stopDragging() {
+    isDragging = false;
+}
+
+function createObstacle() {
+    const obstacle = document.createElement('div');
+    obstacle.classList.add('obstacle');
+    const lane = Math.floor(Math.random() * 5) + 1;
+    obstacle.style.left = `${(lane - 1) * 60 + 10}px`;
+    obstacle.style.top = '0px';
+    gameArea.appendChild(obstacle);
+    obstacles.push(obstacle);
+}
+
+function gameLoop() {
+    obstacles.forEach(obstacle => {
+        const top = parseInt(obstacle.style.top);
+        if (top > 600) {
+            obstacle.remove();
+            obstacles = obstacles.filter(o => o !== obstacle);
+        } else {
+            obstacle.style.top = `${top + speed}px`;
+        }
+
+        // Check collision
+        const playerTop = 560; // Bottom 10px + player height 40px
+        const playerLeft = parseInt(player.style.left);
+        const playerRight = playerLeft + 40;
+        const obstacleTop = top;
+        const obstacleBottom = top + 40;
+        const obstacleLeft = parseInt(obstacle.style.left);
+        const obstacleRight = obstacleLeft + 40;
+
+        if (playerTop < obstacleBottom && playerTop > obstacleTop &&
+            playerRight > obstacleLeft && playerLeft < obstacleRight) {
+            score += speedBoost ? 2 : 1;
+            updateScore();
+            obstacle.remove();
+            obstacles = obstacles.filter(o => o !== obstacle);
+        }
+    });
+}
+
+function updateScore() {
+    scoreDisplay.textContent = `Score: ${score}`;
+}
+
+function increaseSpeed() {
+    speed += 2;
+    speedBoost = true;
+    setTimeout(() => {
+        speedBoost = false;
+    }, 5000); // Speed boost lasts for 5 seconds
+    setTimeout(increaseSpeed, 10000 + Math.random() * 10000); // Random speed increase between 10 and 20 seconds
+}
+
+</script>
+</body>
+</html>
