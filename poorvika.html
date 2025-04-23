@@ -103,7 +103,7 @@
     }
 </style>
 <body class="main-body">
-    <img class="girl-image" src="girl-img.png">
+    <img class="girl-image" onclick="playmusic()" src="girl-img.png">
     <div class="invitation-card">
         <div class="content">
             <div>
@@ -213,7 +213,10 @@
       createSnowflake();
     }
 
-    var y = document.getElementById('myAudioC8');
-    y.play();
+    function playmusic()
+    {
+        var y = document.getElementById('myAudioC8');
+        y.play();
+    }
 </script>
 </html>
