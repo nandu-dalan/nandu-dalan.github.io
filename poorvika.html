@@ -214,6 +214,30 @@
     {
         var y = document.getElementById('myAudioC8');
         y.play();
+
+        // Get the girl image element
+        var girlImage = document.querySelector('.girl-image');
+        
+        // Set initial position if not already set
+        if (!girlImage.style.left) {
+            girlImage.style.left = "0px";
+        }
+        
+        // Add transition for smooth animation
+        girlImage.style.transition = "left 3s ease-in-out";
+        
+        // Move right first
+        girlImage.style.left = "250px";
+        
+        // Then move left after a delay
+        setTimeout(function() {
+            girlImage.style.left = "-150px";
+        }, 3000);
+        
+        // Return to original position
+        setTimeout(function() {
+            girlImage.style.left = "0px";
+        }, 8000);
     }
 </script>
 </html>
