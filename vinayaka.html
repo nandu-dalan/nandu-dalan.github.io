@@ -534,6 +534,51 @@
             line-height: 1.6;
         }
 
+        /* Floating Location Link */
+        .floating-location {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.9), rgba(255, 237, 78, 0.9));
+            padding: 15px 30px;
+            border-radius: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.4);
+            border: 2px solid rgba(255, 215, 0, 0.6);
+            backdrop-filter: blur(15px);
+            transition: all 0.3s ease;
+            animation: floatUpDown 3s ease-in-out infinite;
+        }
+
+        .floating-location:hover {
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 215, 0, 0.6);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 1), rgba(255, 237, 78, 1));
+        }
+
+        .floating-location a {
+            text-decoration: none;
+            color: #1a1a2e;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .floating-location a:hover {
+            color: #0f0f23;
+        }
+
+        @keyframes floatUpDown {
+            0%, 100% { transform: translateX(-50%) translateY(0px); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
 
 
         /* Decorative Elements */
@@ -730,6 +775,13 @@
                 VATADAHOSAHALLI
             </p>
         </footer>
+    </div>
+
+    <!-- Floating Location Link -->
+    <div class="floating-location">
+        <a href="https://maps.app.goo.gl/UHvRDJAbVxteQXuW8?g_st=aw" target="_blank" rel="noopener noreferrer">
+            Location
+        </a>
     </div>
 
     <script>
