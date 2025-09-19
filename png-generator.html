@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparent PNG Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #121212;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #1e1e1e;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            border: 1px solid #333;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #ffffff;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #b0b0b0;
+            font-size: 1.1rem;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .preset-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .preset-btn {
+            background: #2a2a2a;
+            border: 1px solid #404040;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            font-weight: 500;
+            color: #e0e0e0;
+        }
+
+        .preset-btn:hover {
+            border-color: #666;
+            background: #333;
+        }
+
+        .preset-btn.active {
+            background: #0d7377;
+            border-color: #0d7377;
+            color: white;
+        }
+
+        .custom-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            color: #e0e0e0;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #404040;
+            font-size: 16px;
+            transition: border-color 0.2s ease;
+            background: #2a2a2a;
+            color: #ffffff;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #0d7377;
+            background: #333;
+        }
+
+        .preview-section {
+            margin-bottom: 30px;
+        }
+
+        .preview-container {
+            background: 
+                linear-gradient(45deg, #333 25%, transparent 25%),
+                linear-gradient(-45deg, #333 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #333 75%),
+                linear-gradient(-45deg, transparent 75%, #333 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            border: 1px solid #404040;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            background-color: #2a2a2a;
+        }
+
+        .preview-canvas {
+            border: 2px dashed #666;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #b0b0b0;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .dimensions-info {
+            text-align: center;
+            margin-top: 15px;
+            color: #b0b0b0;
+            font-weight: 500;
+        }
+
+        .download-btn {
+            width: 100%;
+            background: #0d7377;
+            color: white;
+            border: none;
+            padding: 16px 24px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 16px rgba(13, 115, 119, 0.3);
+        }
+
+        .download-btn:hover {
+            background: #14a085;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(13, 115, 119, 0.4);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        .download-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .custom-inputs {
+                grid-template-columns: 1fr;
+            }
+
+            .preset-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 Transparent PNG Generator</h1>
+            <p>Create transparent PNG files with custom dimensions</p>
+        </div>
+
+        <div class="form-section">
+            <div class="section-title">Aspect Ratio Presets</div>
+            <div class="preset-buttons">
+                <button class="preset-btn" data-ratio="16:9">16:9</button>
+                <button class="preset-btn" data-ratio="9:16">9:16</button>
+                <button class="preset-btn" data-ratio="4:3">4:3</button>
+                <button class="preset-btn" data-ratio="1:1">1:1</button>
+                <button class="preset-btn" data-ratio="3:2">3:2</button>
+                <button class="preset-btn" data-ratio="21:9">21:9</button>
+            </div>
+            
+            <div class="section-title" style="margin-top: 25px;">Social Media Formats</div>
+            <div class="preset-buttons">
+                <button class="preset-btn" data-ratio="instagram-post" data-social="true">📷 Instagram Post</button>
+                <button class="preset-btn" data-ratio="instagram-story" data-social="true">📱 Instagram Story</button>
+                <button class="preset-btn" data-ratio="facebook-post" data-social="true">📘 Facebook Post</button>
+                <button class="preset-btn" data-ratio="facebook-cover" data-social="true">🎭 Facebook Cover</button>
+                <button class="preset-btn" data-ratio="twitter-post" data-social="true">🐦 Twitter Post</button>
+                <button class="preset-btn" data-ratio="twitter-header" data-social="true">🎪 Twitter Header</button>
+                <button class="preset-btn" data-ratio="linkedin-post" data-social="true">💼 LinkedIn Post</button>
+                <button class="preset-btn" data-ratio="linkedin-banner" data-social="true">🏢 LinkedIn Banner</button>
+                <button class="preset-btn active" data-ratio="custom">Custom</button>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="section-title">Dimensions</div>
+            <div class="custom-inputs">
+                <div class="input-group">
+                    <label for="width">Width (px)</label>
+                    <input type="number" id="width" min="1" max="8000" value="1920" required>
+                    <div class="error-message" id="width-error">Width must be between 1 and 8000 pixels</div>
+                </div>
+                <div class="input-group">
+                    <label for="height">Height (px)</label>
+                    <input type="number" id="height" min="1" max="8000" value="1080" required>
+                    <div class="error-message" id="height-error">Height must be between 1 and 8000 pixels</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="preview-section">
+            <div class="section-title">Preview</div>
+            <div class="preview-container">
+                <div class="preview-canvas" id="preview">
+                    <span>1920 × 1080</span>
+                </div>
+            </div>
+            <div class="dimensions-info" id="dimensionsInfo">
+                File size: ~8KB | Aspect ratio: 16:9
+            </div>
+        </div>
+
+        <button class="download-btn" id="downloadBtn">
+            📥 Download Transparent PNG
+        </button>
+    </div>
+
+    <script>
+        class TransparentPNGGenerator {
+            constructor() {
+                this.widthInput = document.getElementById('width');
+                this.heightInput = document.getElementById('height');
+                this.previewCanvas = document.getElementById('preview');
+                this.dimensionsInfo = document.getElementById('dimensionsInfo');
+                this.downloadBtn = document.getElementById('downloadBtn');
+                this.presetButtons = document.querySelectorAll('.preset-btn');
+                
+                this.init();
+            }
+
+            init() {
+                // Add event listeners
+                this.widthInput.addEventListener('input', () => this.updatePreview());
+                this.heightInput.addEventListener('input', () => this.updatePreview());
+                this.downloadBtn.addEventListener('click', () => this.downloadPNG());
+                
+                this.presetButtons.forEach(btn => {
+                    btn.addEventListener('click', (e) => this.handlePresetClick(e));
+                });
+
+                // Initial preview update
+                this.updatePreview();
+            }
+
+            handlePresetClick(e) {
+                const ratio = e.target.dataset.ratio;
+                
+                // Remove active class from all buttons
+                this.presetButtons.forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+
+                if (ratio !== 'custom') {
+                    this.applyPresetRatio(ratio);
+                }
+            }
+
+            applyPresetRatio(ratio) {
+                const baseWidth = 1920;
+                let width, height;
+
+                switch (ratio) {
+                    case '16:9':
+                        width = baseWidth;
+                        height = Math.round(baseWidth * 9 / 16);
+                        break;
+                    case '9:16':
+                        width = Math.round(baseWidth * 9 / 16);
+                        height = baseWidth;
+                        break;
+                    case '4:3':
+                        width = baseWidth;
+                        height = Math.round(baseWidth * 3 / 4);
+                        break;
+                    case '1:1':
+                        width = height = 1080;
+                        break;
+                    case '3:2':
+                        width = baseWidth;
+                        height = Math.round(baseWidth * 2 / 3);
+                        break;
+                    case '21:9':
+                        width = baseWidth;
+                        height = Math.round(baseWidth * 9 / 21);
+                        break;
+                    // Social Media Formats
+                    case 'instagram-post':
+                        width = height = 1080; // 1:1 square
+                        break;
+                    case 'instagram-story':
+                        width = 1080;
+                        height = 1920; // 9:16
+                        break;
+                    case 'facebook-post':
+                        width = 1200;
+                        height = 630; // ~1.91:1
+                        break;
+                    case 'facebook-cover':
+                        width = 1200;
+                        height = 315; // ~3.8:1
+                        break;
+                    case 'twitter-post':
+                        width = 1200;
+                        height = 675; // 16:9
+                        break;
+                    case 'twitter-header':
+                        width = 1500;
+                        height = 500; // 3:1
+                        break;
+                    case 'linkedin-post':
+                        width = 1200;
+                        height = 627; // ~1.91:1
+                        break;
+                    case 'linkedin-banner':
+                        width = 1584;
+                        height = 396; // 4:1
+                        break;
+                }
+
+                this.widthInput.value = width;
+                this.heightInput.value = height;
+                this.updatePreview();
+            }
+
+            validateInputs() {
+                const width = parseInt(this.widthInput.value);
+                const height = parseInt(this.heightInput.value);
+                
+                let isValid = true;
+
+                // Validate width
+                if (isNaN(width) || width < 1 || width > 8000) {
+                    document.getElementById('width-error').style.display = 'block';
+                    isValid = false;
+                } else {
+                    document.getElementById('width-error').style.display = 'none';
+                }
+
+                // Validate height
+                if (isNaN(height) || height < 1 || height > 8000) {
+                    document.getElementById('height-error').style.display = 'block';
+                    isValid = false;
+                } else {
+                    document.getElementById('height-error').style.display = 'none';
+                }
+
+                return isValid;
+            }
+
+            updatePreview() {
+                const isValid = this.validateInputs();
+                
+                if (!isValid) {
+                    this.downloadBtn.disabled = true;
+                    return;
+                }
+
+                const width = parseInt(this.widthInput.value);
+                const height = parseInt(this.heightInput.value);
+                
+                // Update preview dimensions
+                const containerWidth = 300;
+                const containerHeight = 150;
+                const aspectRatio = width / height;
+                
+                let previewWidth, previewHeight;
+                
+                if (aspectRatio > containerWidth / containerHeight) {
+                    previewWidth = containerWidth;
+                    previewHeight = containerWidth / aspectRatio;
+                } else {
+                    previewHeight = containerHeight;
+                    previewWidth = containerHeight * aspectRatio;
+                }
+
+                this.previewCanvas.style.width = `${previewWidth}px`;
+                this.previewCanvas.style.height = `${previewHeight}px`;
+                this.previewCanvas.innerHTML = `<span>${width} × ${height}</span>`;
+
+                // Calculate aspect ratio
+                const gcd = this.getGCD(width, height);
+                const ratioW = width / gcd;
+                const ratioH = height / gcd;
+                
+                // Estimate file size (transparent PNG is quite small)
+                const estimatedSize = Math.max(1, Math.round((width * height) / 50000));
+                
+                this.dimensionsInfo.textContent = `File size: ~${estimatedSize}KB | Aspect ratio: ${ratioW}:${ratioH}`;
+                
+                this.downloadBtn.disabled = false;
+
+                // Update preset button selection
+                const currentRatio = `${ratioW}:${ratioH}`;
+                const matchingPreset = Array.from(this.presetButtons).find(btn => 
+                    btn.dataset.ratio === currentRatio
+                );
+                
+                this.presetButtons.forEach(btn => btn.classList.remove('active'));
+                if (matchingPreset) {
+                    matchingPreset.classList.add('active');
+                } else {
+                    document.querySelector('[data-ratio="custom"]').classList.add('active');
+                }
+            }
+
+            getGCD(a, b) {
+                return b === 0 ? a : this.getGCD(b, a % b);
+            }
+
+            downloadPNG() {
+                if (!this.validateInputs()) return;
+
+                const width = parseInt(this.widthInput.value);
+                const height = parseInt(this.heightInput.value);
+
+                // Create canvas
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                
+                // Get context (transparent by default)
+                const ctx = canvas.getContext('2d');
+                
+                // Canvas is already transparent, no need to draw anything
+                
+                // Create download link
+                canvas.toBlob((blob) => {
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = `transparent_${width}x${height}.png`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                }, 'image/png');
+            }
+        }
+
+        // Initialize the generator when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new TransparentPNGGenerator();
+        });
+    </script>
+</body>
+</html>
